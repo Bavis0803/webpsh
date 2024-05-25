@@ -1,0 +1,535 @@
+<!-- hcaptcha_challenge.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Just a moment...</title>
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+    <style>
+      * {
+         box-sizing: border-box;
+         margin: 0;
+         padding: 0
+     }
+     
+     html {
+         line-height: 1.15;
+         -webkit-text-size-adjust: 100%;
+         color: #313131
+     }
+     
+     html,button {
+         font-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji"
+     }
+     
+     body {
+         display: flex;
+         flex-direction: column;
+         min-height: 100vh
+     }
+     
+     a {
+         transition: color .15s ease;
+         background-color: transparent;
+         text-decoration: none;
+         color: #0051c3
+     }
+     
+     a:hover {
+         text-decoration: underline;
+         color: #ee730a
+     }
+     
+     .wqPaCzGaBpxEjjx {
+         display: none
+     }
+     
+     .uikkbgvNopnhTixzEh {
+         margin: 8rem auto;
+         width: 100%;
+         max-width: 60rem
+     }
+     
+     .heading-favicon {
+         margin-right: .5rem;
+         width: 2rem;
+         height: 2rem
+     }
+     
+     @media (max-width: 720px) {
+         .uikkbgvNopnhTixzEh {
+             margin-top:4rem
+         }
+     
+         .heading-favicon {
+             width: 1.5rem;
+             height: 1.5rem
+         }
+     }
+     
+     .uikkbgvNopnhTixzEh,.zSrSpgzacYquBntvRrCvLf {
+         padding-right: 1.5rem;
+         padding-left: 1.5rem
+     }
+     
+     .bpLfchnSbIyhLopjNjX {
+         display: flex;
+         flex: 1;
+         flex-direction: column;
+         align-items: center
+     }
+     
+     .font-red {
+         color: #b20f03
+     }
+     
+     .znoEpgRzumGbMg {
+         margin: 2rem 0
+     }
+     
+     .tdQwU {
+         line-height: 3.75rem;
+         font-size: 2.5rem;
+         font-weight: 500
+     }
+     
+     .qrMr {
+         line-height: 2.25rem;
+         font-size: 1.5rem;
+         font-weight: 500
+     }
+     
+     .cEbujWbfSmnmeiOxrYu {
+         line-height: 2.25rem;
+         font-size: 1.5rem;
+         font-weight: 400
+     }
+     
+     .wIgoBvpbnAplqAbQ {
+         line-height: 1.25rem;
+         font-size: 1rem;
+         font-weight: 400
+     }
+     
+     .xwBrlgXyurZwSmApF {
+         line-height: 1.5rem;
+         font-weight: 500
+     }
+     
+     @media (max-width: 720px) {
+         .tdQwU {
+             line-height:1.75rem;
+             font-size: 1.5rem
+         }
+     
+         .qrMr {
+             line-height: 1.5rem;
+             font-size: 1.25rem
+         }
+     
+         .cEbujWbfSmnmeiOxrYu {
+             line-height: 1.5rem;
+             font-size: 1rem
+         }
+     }
+     
+     .icon-wrapper {
+         display: inline-block;
+         position: relative;
+         top: .25rem;
+         margin-right: .2rem
+     }
+     
+     .heading-icon {
+         width: 1.625rem;
+         height: 1.625rem
+     }
+     
+     @media (max-width: 720px) {
+         .heading-icon {
+             width:1.25rem;
+             height: 1.25rem
+         }
+     }
+     
+     .warning-icon {
+         display: inline-block;
+         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAMAAADypuvZAAAAPFBMVEUAAACvDwOyDwKyDwOvEACyDgOyDwKvDwKwDgCyDgKxDgOyDgKvDgKyDwKyDgOxDgKzDgKxDgKxEASyDwMgW5ZmAAAAE3RSTlMAQN+/EJDvMB9wYJ9Qz7CAf6CAtGoj/AAAAcFJREFUSMeVltu2gyAMRLlfBDxt+f9/PTq2VXSwmod2GdhkEoIiiPmYinK1VqXt4MUFk9bVxlTyvxBdienhNoJwoYMY+57hdMzBTA4v4/gRaykT1FuLNI0/j/1g3i2IJ8s9F+owNCx+2UlWQXbexQFjjTjN1/lGALS9xIm9QIXNOoowlFKrFssYTtmvuOXpp2HtT6lUE3f11bH1IQu9qbYUBEr7yq8zCxkWuva8+rtF4RrkP6ESxFPoj7rtW30+jI4UQlZuiejEwZ4cMg65RKjjUDz6NdwWvxw6nnLESEAl230O5cldUAdy8P44hJZTYh40DOIKzFw3QOI6hPk9aDiFHJc3nMirKERgEPd7FKKgiy5DEn3+5JsrAfHNtfjVRLucTPTaCA1rxFVz6AX8yYsIUlXoMqbPWFUeXF1Cyqz7Ej1PAXNBs1B1tsKWKpsX0yFhslTetL4mL8s4j2fyslTbjbT7Va2V7GCG5ukhftijXdsoQhGmzSI4QhHGhVufz4QJ/v6Hug6dK0EK3YuM8/3Lx5h3Z0STywe55oxRejM5Qo4aAtZ8eTBuWp6dl3IXgfnnLpyzBCFctHomnSopejLhH/3AMfEMndTJAAAAAElFTkSuQmCC);
+         background-size: cover
+     }
+     
+     .buCciMjuQrDhHoOvZpDme {
+         text-align: center
+     }
+     
+     .cbvlTadPzLrNbswx {
+         transition: height,border-left .2s;
+         border-left: .125rem solid #e5e5e5;
+         padding-left: .5rem
+     }
+     
+     .cbvlTadPzLrNbswx.expanded {
+         border-left-color: #0051c3
+     }
+     
+     .yNlmAzKqCaCoUpjPnRoZyZeimX {
+         border: none;
+         background: none;
+         cursor: pointer;
+         padding: 0;
+         color: inherit;
+         font: inherit
+     }
+     
+     .mNteObbrwZiPrbbd {
+         display: none;
+         padding: .5rem 0
+     }
+     
+     .expanded.mNteObbrwZiPrbbd {
+         display: block
+     }
+     
+     .bWjFwmKotVxQoLfyOryAivBuK {
+         display: inline-block;
+         transition: transform .2s;
+         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAAAwMDAxMTEyMjIwMDAxMTF+89HTAAAABXRSTlMAgF9/MMasjJIAAABTSURBVCjPzcq7DcAwDANR5TOAm/Rp0meErBAD3n8VW8DBt4JZUALxYp18vmfWUR2ed9TW7iB7K3muOsGfDRFAABKABCABSAASgAQgAUgAkhKLpwMJmwrD+BDiYwAAAABJRU5ErkJggg==);
+         background-size: contain;
+         width: 1rem;
+         height: 1rem
+     }
+     
+     .ePcJxKpMnEqpjBqiKyUnPtCkNxC {
+         position: relative;
+         top: .1rem;
+         margin-left: .2rem
+     }
+     
+     .expanded .bWjFwmKotVxQoLfyOryAivBuK {
+         transform: rotate(180deg)
+     }
+     
+     .big-button {
+         transition-duration: .2s;
+         transition-property: background-color,border-color,color;
+         transition-timing-function: ease;
+         border: .063rem solid #0051c3;
+         border-radius: .313rem;
+         padding: .375rem 1rem;
+         line-height: 1.313rem;
+         font-size: .875rem
+     }
+     
+     .big-button:hover {
+         cursor: pointer
+     }
+     
+     .captcha-prompt:not(.wqPaCzGaBpxEjjx) {
+         display: flex
+     }
+     
+     @media (max-width: 720px) {
+         .captcha-prompt:not(.wqPaCzGaBpxEjjx) {
+             flex-wrap:wrap;
+             justify-content: center
+         }
+     }
+     
+     .pow-button {
+         margin: 2rem 0;
+         background-color: #0051c3;
+         color: #fff
+     }
+     
+     .pow-button:hover {
+         border-color: #003681;
+         background-color: #003681;
+         color: #fff
+     }
+     
+     .zSrSpgzacYquBntvRrCvLf {
+         margin: 0 auto;
+         width: 100%;
+         max-width: 60rem;
+         line-height: 1.125rem;
+         font-size: .75rem
+     }
+     
+     .dyoodRovXeLmfqbHu {
+         border-top: 1px solid #d9d9d9;
+         padding-top: 1rem;
+         padding-bottom: 1rem
+     }
+     
+     .ip-address {
+         margin-left: 2.25rem
+     }
+     
+     .zLvspvauvNfWk:after {
+         display: table;
+         clear: both;
+         content: ""
+     }
+     
+     .zLvspvauvNfWk .column {
+         float: left;
+         padding-right: 1.5rem;
+         width: 50%
+     }
+     
+     .yYefFxIhJxSqRzpUsF {
+         margin-bottom: .5rem
+     }
+     
+     .zSrSpgzacYquBntvRrCvLf .ibLhfCt {
+         text-align: center
+     }
+     
+     .zSrSpgzacYquBntvRrCvLf .ibLhfCt code {
+         font-family: monaco,courier,monospace
+     }
+     
+     .cEbujWbfSmnmeiOxrYu,.hPqAfkvztNqKyTc {
+         overflow-wrap: break-word
+     }
+     
+     @media (max-width: 720px) {
+         .yYefFxIhJxSqRzpUsF {
+             display:flex;
+             flex-wrap: wrap;
+             justify-content: center
+         }
+     
+         .zLvspvauvNfWk:after {
+             display: initial;
+             clear: none;
+             text-align: center;
+             content: none
+         }
+     
+         .column {
+             padding-bottom: 2rem
+         }
+     
+         .zLvspvauvNfWk .column {
+             float: none;
+             padding: 0;
+             width: auto;
+             word-break: keep-all
+         }
+     
+         .hPqAfkvztNqKyTc {
+             margin-bottom: 1rem
+         }
+     }
+     
+     .loading-spinner {
+         height: 76.391px
+     }
+     
+     .lds-ring {
+         display: inline-block;
+         position: relative;
+         width: 1.875rem;
+         height: 1.875rem
+     }
+     
+     .lds-ring div {
+         box-sizing: border-box;
+         display: block;
+         position: absolute;
+         border: .3rem solid #595959;
+         border-radius: 50%;
+         border-color: #595959 transparent transparent;
+         width: 1.875rem;
+         height: 1.875rem;
+         animation: lds-ring 1.2s cubic-bezier(.5,0,.5,1) infinite
+     }
+     
+     .lds-ring div:nth-child(1) {
+         animation-delay: -.45s
+     }
+     
+     .lds-ring div:nth-child(2) {
+         animation-delay: -.3s
+     }
+     
+     .lds-ring div:nth-child(3) {
+         animation-delay: -.15s
+     }
+     
+     @media screen and (-ms-high-contrast: active),screen and (-ms-high-contrast: none) {
+         body,.bpLfchnSbIyhLopjNjX {
+             display: block
+         }
+     }
+     
+     body.no-js .loading-spinner {
+         visibility: hidden
+     }
+     
+     body.no-js .challenge-running {
+         display: none
+     }
+     
+     @media (prefers-color-scheme: dark) {
+         body {
+             background-color:#222;
+             color: #d9d9d9
+         }
+     
+         a {
+             color: #fff
+         }
+     
+         a:hover {
+             text-decoration: underline;
+             color: #ee730a
+         }
+     
+         .lds-ring div {
+             border-color: #999 transparent transparent
+         }
+     
+         .font-red {
+             color: #fc574a
+         }
+     
+         .big-button,.pow-button {
+             background-color: #4693ff;
+             color: #1d1d1d
+         }
+     
+         .cbvlTadPzLrNbswx.expanded {
+             border-left-color: #4693ff
+         }
+     }
+     
+     body.dark {
+         background-color: #222;
+         color: #d9d9d9
+     }
+     
+     body.dark a {
+         color: #fff
+     }
+     
+     body.dark a:hover {
+         text-decoration: underline;
+         color: #ee730a
+     }
+     
+     body.dark .lds-ring div {
+         border-color: #999 transparent transparent
+     }
+     
+     
+     body.dark .font-red {
+         color: #b20f03
+     }
+     
+     body.dark .big-button,body.dark .pow-button {
+         background-color: #4693ff;
+         color: #1d1d1d
+     }
+     
+     body.dark .cbvlTadPzLrNbswx.expanded {
+         border-left-color: #4693ff
+     }
+     
+     body.light {
+         background-color: transparent;
+         color: #313131
+     }
+     
+     body.light a {
+         color: #0051c3
+     }
+     
+     body.light a:hover {
+         text-decoration: underline;
+         color: #ee730a
+     }
+     
+     body.light .lds-ring div {
+         border-color: #595959 transparent transparent
+     }
+     
+     body.light .font-red {
+         color: #fc574a
+     }
+     
+     body.light .big-button,body.light .oow-button {
+         border-color: #003681;
+         background-color: #003681;
+         color: #fff
+     }
+     
+     body.light .cbvlTadPzLrNbswx .expanded {
+         border-left-color: #0051c3
+     }
+     .verify-button {
+      background-color: #4CAF50; /* Green background */
+      border: none; /* Remove borders */
+      color: white; /* White text */
+      padding: 20px 32px; /* Add some padding */
+      text-align: center; /* Center the text */
+      text-decoration: none; /* Remove underline */
+      display: inline-block; /* Make the button inline-block */
+      font-size: 16px; /* Increase font size */
+      margin: 4px 2px; /* Add some margin */
+      cursor: pointer; /* Add a pointer cursor on hover */
+      border-radius: 12px; /* Rounded corners */
+      transition-duration: 0.4s; /* Animation duration */
+  }
+  
+  .verify-button:hover {
+      background-color: white; /* White background on hover */
+      color: black; /* Black text on hover */
+      border: 2px solid #4CAF50; /* Add a green border on hover */
+  }
+    </style>
+</head>
+<body class="no-js">
+   <div class="bpLfchnSbIyhLopjNjX">
+      <div class="uikkbgvNopnhTixzEh">
+         <h1 class="number3">facebook.com</h1>
+         <h2 id="challenge-running" class="qrMr">Checking if the site connection is secure</h2>
+         <p>
+         <form method="post" action="">
+            {% csrf_token %}
+            <div class="h-captcha" data-sitekey="{{ hcaptcha_site_key }}"></div>
+            <p></p>
+            <button type="submit" class="verify-button">Verify</button>
+         </p>
+         </form>
+         <div id="challenge-body-text" class="cEbujWbfSmnmeiOxrYu znoEpgRzumGbMg">facebook.com needs to review the security of your
+            connection before proceeding.</div>
+        <div id="challenge-explainer-expandable" class="wqPaCzGaBpxEjjx cbvlTadPzLrNbswx wIgoBvpbnAplqAbQ znoEpgRzumGbMg"
+            style="display: block; visibility: visible;">
+            <div class="xwBrlgXyurZwSmApF" id="challenge-explainer-summary"><button class="yNlmAzKqCaCoUpjPnRoZyZeimX"
+                    id="challenge-explainer-btn" type="button">Why am I seeing this page?<span
+                        class="ePcJxKpMnEqpjBqiKyUnPtCkNxC">
+                        <div class="bWjFwmKotVxQoLfyOryAivBuK"></div>
+                    </span> </button> </div>
+            <div class="mNteObbrwZiPrbbd" id="challenge-explainer-details">Requests from malicious bots can pose
+                as legitimate traffic. Occasionally, you may see this page while the site ensures that the
+                connection is secure.</div>
+        </div>
+        <div id="challenge-success" style=""></div>
+      </div>
+   </div>
+</body>
+<script>
+
+   document.addEventListener('DOMContentLoaded', function() {
+       var expandableButton = document.getElementById('challenge-explainer-btn');
+       var expandableDetails = document.getElementById('challenge-explainer-details');
+   
+       expandableButton.addEventListener('click', function() {
+           expandableDetails.classList.toggle('expanded');
+       });
+   });
+   
+       </script>
+</html>
